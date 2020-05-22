@@ -5,13 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -174,6 +168,19 @@ public class BasePageObject {
 	protected void hoverOverElement(WebElement element) {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).build().perform();
+	}
+
+	/**Add cookie */
+	public  void setCookie(Cookie ck) {
+		log.info("Adding cookie" + ck.getName());
+		driver.manage().addCookie(ck);
+		log.info("Cookie added");
+	}
+
+	/**Get cookie value using cookie name */
+	public String getCookie(String name) {
+		log.info("Getting cookie" + name);
+		return driver.manage().getCookieNamed(name).getValue();
 	}
 
 }
